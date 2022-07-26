@@ -1,0 +1,42 @@
+{
+    // Sets the run context to one level up instead of the .devcontainer folder.
+    "image": "rocm/pytorch:latest",
+    // Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+    // Set *default* container specific settings.json values on container create.
+    // Add the IDs of extensions you want installed when the container is created.
+    "extensions": [],
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Uncomment the next line to run commands after the container is created - for example installing git.
+    // "postCreateCommand": "apt-get update && apt-get install -y git",
+    // Uncomment when using a ptrace-based debugger like C++, Go, and Rust
+    // "runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
+    // "runArgs": [
+    //     "--gpus",
+    //     "device=0"
+    // ],
+    // Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-in-docker.
+    // "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+    // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+    // "remoteUser": "vscode"
+    // Using volume
+    // "image": "ubuntu-remote-test:0.0.1", // Or "dockerFile"
+    // "workspaceFolder": "/workspace",
+    // "workspaceMount": "source=remote-workspace,target=/workspace,type=volume"
+    // Using bind
+    // /home/leimao/Workspace/vs-remote-workspace/ is a directory on the remote host computer
+    // "workspaceFolder" is the folder in the Docker container as workspace
+    // target=/workspace is the folder in the Docker container that the workspace on the host server are going to bind to
+    "runArgs": [
+        "--cap-add=SYS_PTRACE",
+        "--security-opt",
+        "seccomp=unconfined",
+        "--privileged",
+        "--init",
+        "--network=host",
+        "--device=/dev/kfd",
+        "--device=/dev/dri",
+        "--group-add=video",
+        "--ipc=host"
+    ],
+}

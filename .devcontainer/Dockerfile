@@ -1,0 +1,1 @@
+FROM rocm/pytorch:latest
